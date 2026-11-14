@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A surprise for miss23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Fraunces:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night-a:#12123a; --night-b:#2a1d5c; --ink-night:#f4ecff;
+  --dawn-a:#ff8fa3; --dawn-b:#ffb88c; --dawn-c:#ffe3b8; --ink-dawn:#3a1747;
+  --accent:#ff5d8f; --gold:#ffc857; --mint:#5fd6b4; --sky:#7db8ff;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;font-family:var(--sans);color:var(--ink-night);background:linear-gradient(180deg,var(--night-a),var(--night-b));overflow-x:hidden;transition:color 2.4s}
+body.dawn{color:var(--ink-dawn)}
+.dawnbg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,var(--dawn-a),var(--dawn-b) 55%,var(--dawn-c));opacity:0;transition:opacity 2.6s ease}
+body.dawn .dawnbg{opacity:1}
+.stars{position:fixed;inset:0;z-index:0;transition:opacity 1.6s}
+body.dawn .stars{opacity:0}
+.stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.2;transform:scale(.6)}}
+main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px 56px;gap:8px}
+.hello{font:italic 600 clamp(1.2rem,4.5vw,1.8rem)/1.3 var(--serif);margin:0;min-height:1.4em;opacity:0;transform:translateY(8px);transition:opacity 1s,transform 1s}
+.hello.show{opacity:1;transform:none}
+.name{font:600 clamp(3.6rem,19vw,9.5rem)/1 var(--serif);margin:0;letter-spacing:-.02em;white-space:nowrap}
+.slot{display:inline-block;height:1em;overflow:hidden;vertical-align:bottom}
+.col{display:flex;flex-direction:column;transition:transform 1.5s cubic-bezier(.55,0,.2,1.25)}
+.col span{display:block;height:1em;line-height:1em}
+.rolled .col{transform:translateY(-1em)}
+.rolled .slot{animation:glow 1.6s ease-out}
+@keyframes glow{0%{filter:drop-shadow(0 0 0 var(--gold))}35%{filter:drop-shadow(0 0 26px var(--gold))}100%{filter:none}}
+.lede{max-width:34ch;margin:10px 0 0;font-size:1.05rem;line-height:1.6;opacity:.9}
+.go,.again{font:600 1rem var(--sans);border:0;border-radius:999px;padding:15px 30px;margin-top:22px;cursor:pointer;background:var(--gold);color:#3a1747;transition:transform .2s}
+.go:hover,.again:hover{transform:translateY(-2px)}
+.go:focus-visible,.again:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.again{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.count{font:600 clamp(3rem,14vw,6rem)/1 var(--serif);min-height:1em;margin-top:18px}
+.count.pop{animation:pop .9s ease-out}
+@keyframes pop{0%{transform:scale(.4);opacity:0}35%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:.35}}
+.hide{display:none!important}
+.cake{display:none;flex-direction:column;align-items:center;margin-top:8px}
+.cake.show{display:flex;animation:rise 1.2s cubic-bezier(.2,1.2,.4,1)}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+.cake svg{width:min(62vw,240px);height:auto;overflow:visible}
+.flame{fill:var(--gold);transform-box:fill-box;transform-origin:50% 100%;animation:fl .5s ease-in-out infinite alternate;transition:opacity .5s,transform .5s}
+@keyframes fl{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.88,1.12) rotate(3deg)}}
+.out .flame{animation:none;opacity:0;transform:scale(.2)}
+.smoke{fill:#fff;opacity:0}
+.out .smoke{animation:sm 2s ease-out forwards}
+.out .smoke:nth-of-type(2){animation-delay:.2s}
+@keyframes sm{0%{opacity:.8;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(-40px) scale(1.6)}}
+.wishes{max-width:36ch;margin-top:22px;min-height:1px}
+.wishes p{font:italic 600 clamp(1.15rem,4.4vw,1.5rem)/1.45 var(--serif);margin:0 0 14px;opacity:0;transform:translateY(10px);animation:wi 1s ease forwards}
+.wishes p.sig{font:400 1rem var(--sans);font-style:normal}
+@keyframes wi{to{opacity:1;transform:none}}
+.balloon{position:fixed;bottom:-140px;z-index:1;width:var(--s);height:calc(var(--s)*1.22);border-radius:50% 50% 48% 48%;background:var(--c);animation:up var(--t) ease-in forwards;pointer-events:none}
+.balloon::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:90px;background:currentColor;opacity:.5}
+@keyframes up{0%{transform:translate(0,0)}50%{transform:translate(18px,-60vh)}100%{transform:translate(-14px,-135vh)}}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.col{transition-duration:.01s}.stars i,.flame{animation:none}.balloon{display:none}.cake.show,.count.pop{animation:none}}
+</style>
+</head>
+<body>
+<div class="stars" id="stars" aria-hidden="true"></div>
+<div class="dawnbg" aria-hidden="true"></div>
+
+<main>
+  <p class="hello" id="hello">Happy birthday!</p>
+  <h1 class="name" id="name" aria-label="miss23">miss<span class="slot" aria-hidden="true"><span class="col"><span>23</span><span>24</span></span></span></h1>
+
+  <div id="intro">
+    <p class="lede">Someone has a surprise waiting for you. Ready?</p>
+    <button class="go" id="go">Open your surprise</button>
+  </div>
+  <div class="count hide" id="count" aria-live="assertive"></div>
+
+  <section class="cake" id="cake">
+    <svg id="cakeSvg" viewBox="0 0 220 230" role="img" aria-label="Birthday cake with two candles">
+      <ellipse cx="110" cy="205" rx="100" ry="14" fill="#fff" opacity=".85"/>
+      <rect x="30" y="150" width="160" height="52" rx="12" fill="#ff5d8f"/>
+      <rect x="52" y="104" width="116" height="52" rx="12" fill="#ff8fb4"/>
+      <path d="M30 160q13 14 26 0t26 0 26 0 26 0 26 0 26 0" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+      <path d="M52 114q10 12 19 0t19 0 19 0 19 0 19 0" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <rect x="84" y="70" width="10" height="38" rx="3" fill="#7db8ff"/>
+      <rect x="126" y="70" width="10" height="38" rx="3" fill="#5fd6b4"/>
+      <path class="flame" d="M89 66c-7-8-4-17 0-24 4 7 7 16 0 24z"/>
+      <path class="flame" d="M131 66c-7-8-4-17 0-24 4 7 7 16 0 24z" style="animation-delay:.2s"/>
+      <circle class="smoke" cx="89" cy="56" r="7"/><circle class="smoke" cx="131" cy="56" r="7"/>
+    </svg>
+    <button class="go" id="blow">Make a wish and blow</button>
+    <div class="wishes" id="wishes" aria-live="polite"></div>
+    <button class="again hide" id="again">Watch it again</button>
+  </section>
+</main>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<script>
+// Make it personal: edit these lines.
+const CONFIG = {
+  from: "",   // e.g. "Rahul"  (leave empty to hide the signature)
+  wishes: [
+    "Twenty-four looks good on you.",
+    "May this year be kind, bright and full of laughter.",
+    "Thank you for being exactly who you are."
+  ]
+};
+
+const $ = id => document.getElementById(id);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const wait = ms => new Promise(r => setTimeout(r, reduce ? Math.min(ms, 150) : ms));
+let audio = null, running = false;
+
+// stars
+for (let i = 0; i < 46; i++){
+  const s = document.createElement("i");
+  s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;opacity:${.4+Math.random()*.6}`;
+  $("stars").appendChild(s);
+}
+
+// confetti
+const cv = $("fx"), ctx = cv.getContext("2d");
+let parts = [], raf = 0;
+const sizeCv = () => { cv.width = innerWidth*devicePixelRatio; cv.height = innerHeight*devicePixelRatio; };
+addEventListener("resize", sizeCv); sizeCv();
+function confetti(n = 180){
+  if (reduce) return;
+  const d = devicePixelRatio, cols = ["#ff5d8f","#ffc857","#5fd6b4","#7db8ff","#ffffff","#b69bff"];
+  for (let i = 0; i < n; i++){
+    parts.push({x:cv.width/2+(Math.random()-.5)*cv.width*.4,y:cv.height*.45,vx:(Math.random()-.5)*16*d,vy:(-Math.random()*17-5)*d,g:.4*d,
+      w:(6+Math.random()*7)*d,h:(4+Math.random()*5)*d,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[i%cols.length],life:0});
+  }
+  cancelAnimationFrame(raf); tick();
+}
+function tick(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts = parts.filter(p => p.y < cv.height+40 && p.life < 280);
+  for (const p of parts){
+    p.vy += p.g; p.x += p.vx; p.y += p.vy; p.vx *= .99; p.r += p.vr; p.life++;
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+    ctx.globalAlpha = Math.max(0,1-p.life/280); ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+  }
+  if (parts.length) raf = requestAnimationFrame(tick); else ctx.clearRect(0,0,cv.width,cv.height);
+}
+
+function balloons(){
+  if (reduce) return;
+  const cols = ["#ff5d8f","#ffc857","#5fd6b4","#7db8ff","#b69bff","#ff8a5c"];
+  for (let i = 0; i < 16; i++){
+    const b = document.createElement("div"); b.className = "balloon";
+    b.style.cssText = `left:${Math.random()*92}%;--s:${52+Math.random()*30}px;--c:${cols[i%cols.length]};--t:${7+Math.random()*5}s;animation-delay:${Math.random()*2.5}s;color:#3a1747`;
+    document.body.appendChild(b);
+    b.addEventListener("animationend", () => b.remove());
+  }
+}
+
+// happy birthday melody (synth)
+function sing(){
+  try{
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    const N = {G:392,A:440,B:494,C:523,D:587,E:659,F:698,H:784};
+    const tune = "G.75 G.25 A1 G1 C1 B2 G.75 G.25 A1 G1 D1 C2 G.75 G.25 H1 E1 C1 B1 A1 F.75 F.25 E1 C1 D1 C2".split(" ");
+    let t = audio.currentTime + .1;
+    for (const x of tune){
+      const f = N[x[0]], d = parseFloat(x.slice(1))*.42;
+      const o = audio.createOscillator(), g = audio.createGain();
+      o.type = "triangle"; o.frequency.value = f; o.connect(g); g.connect(audio.destination);
+      g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.18,t+.03); g.gain.exponentialRampToValueAtTime(.001,t+d*.95);
+      o.start(t); o.stop(t+d); t += d;
+    }
+  }catch(e){}
+}
+
+async function start(){
+  if (running) return; running = true;
+  try{ audio = audio || new (window.AudioContext || window.webkitAudioContext)(); }catch(e){}
+  $("intro").classList.add("hide");
+  const c = $("count"); c.classList.remove("hide");
+  for (const n of ["3","2","1"]){
+    c.textContent = n; c.classList.remove("pop"); void c.offsetWidth; c.classList.add("pop");
+    await wait(950);
+  }
+  c.textContent = "";
+  $("name").classList.add("rolled");
+  $("name").setAttribute("aria-label","miss24");
+  await wait(1500);
+  document.body.classList.add("dawn");
+  $("hello").classList.add("show");
+  confetti(); balloons();
+  await wait(1800);
+  c.classList.add("hide");
+  $("cake").classList.add("show");
+  $("cake").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"center"});
+}
+
+async function blow(){
+  $("blow").classList.add("hide");
+  $("cakeSvg").classList.add("out");
+  sing(); confetti(140); balloons();
+  const w = $("wishes");
+  const lines = [...CONFIG.wishes];
+  if (CONFIG.from) lines.push("With love, " + CONFIG.from);
+  for (let i = 0; i < lines.length; i++){
+    await wait(i === 0 ? 900 : 1500);
+    const p = document.createElement("p"); p.textContent = lines[i];
+    if (CONFIG.from && i === lines.length-1) p.className = "sig";
+    w.appendChild(p);
+  }
+  await wait(1200);
+  $("again").classList.remove("hide");
+}
+
+function reset(){
+  document.body.classList.remove("dawn");
+  $("name").classList.remove("rolled"); $("name").setAttribute("aria-label","miss23");
+  $("hello").classList.remove("show");
+  $("cake").classList.remove("show"); $("cakeSvg").classList.remove("out");
+  $("wishes").innerHTML = ""; $("blow").classList.remove("hide"); $("again").classList.add("hide");
+  $("intro").classList.remove("hide"); $("count").classList.add("hide");
+  running = false; window.scrollTo({top:0,behavior: reduce ? "auto" : "smooth"});
+}
+
+$("go").addEventListener("click", start);
+$("blow").addEventListener("click", blow);
+$("again").addEventListener("click", reset);
+</script>
+</body>
+</html>
